@@ -15,6 +15,9 @@ def connect_to_sql():
 def create_table(cursor):
     cursor.execute('''CREATE TABLE IF NOT EXISTS characters (id INT PRIMARY KEY auto_increment, title TEXT, company_name TEXT, category TEXT, job_type TEXT, candidate_required_location TEXT, salary INT, description TEXT)''')
 
+def query_sql(cursor, query):
+    cursor.execute(query)
+    return cursor
 
 
 
