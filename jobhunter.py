@@ -36,3 +36,8 @@ def check_if_job_exists(cursor, remote_job):
     query = f'SELECT * FROM title WHERE name = {title}'
     return query_sql(cursor,query)
 
+def delete_character(cursor, remote_job):
+    title = remote_job['title']
+    query = f'DELETE FROM title WHERE name = {title}'
+    return query_sql(cursor,query)
+    return
