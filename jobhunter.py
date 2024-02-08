@@ -41,3 +41,18 @@ def delete_character(cursor, remote_job):
     query = f'DELETE FROM title WHERE name = {title}'
     return query_sql(cursor,query)
     return
+
+def add_or_print_character(cursor, fetched_jobs):
+    #Loop through characters
+    for title in fetched_jobs:
+        #Checks if current chracter is in DB
+        check_if_job_exists(title)
+        #If cursor returns [] then add a new character else print character info
+        if not cursor.fetchall():
+            add_new_job(cursor, character)
+            print(f'New Job added to DB {job["title"]}')
+        else:
+            print(f'Existing Job found in DB {job["title"]}')
+
+
+
