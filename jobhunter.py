@@ -54,5 +54,15 @@ def add_or_print_character(cursor, fetched_jobs):
         else:
             print(f'Existing Job found in DB {job["title"]}')
 
+def fetch_jobs():
+    response = requests.get('https://remotive.com/api/remote-jobs')
+    data = json. loads(response.text)
+    return data
 
-
+def main():
+    connection = connect_to_sql()
+    cursor = connection.cursor()
+    create_table(cursor)
+    data = fetch_jobs()
+    check = check_if_job_exists(cursor,data['title'][o])
+    print(check.fetchall())
