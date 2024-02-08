@@ -1,0 +1,1 @@
+This is a Repo created by Scott A. for their CNE340 project called "Job Hunter"
