@@ -30,14 +30,14 @@ def add_new_remote_job(cursor, remote_job):
 
 def check_if_job_exists(cursor, remote_job):
     title = remote_job['title']
-    query = f"SELECT * FROM Jobs WHERE title = '{title}'"
-    cursor.execute(query)
+    query = "SELECT * FROM Jobs WHERE title = %s"
+    cursor.execute(query, (title,))
     return cursor.fetchall()
 
 def delete_job(cursor, remote_job):
     title = remote_job['title']
-    query = f"DELETE FROM Jobs WHERE title = '{title}'"
-    cursor.execute(query)
+    query = "DELETE FROM Jobs WHERE title = %s"
+    cursor.execute(query, (title,))
 
 def add_or_print_job(cursor, fetched_jobs):
     for job in fetched_jobs:
