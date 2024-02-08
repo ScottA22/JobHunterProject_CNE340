@@ -31,3 +31,8 @@ def add_new_remote_job(cursor, remote_job):
     cursor.exexcute('INSERT INTO Jobs(title, company_name, category, job_type, candidate_required_location, salary, description) VALUES(%s, %s, %s, %s, %s, %s, %s)', (title, company_name, category, job_type, candidate_required_location, salary, description))
     return cursor
 
+def check_if_job_exists(cursor, remote_job):
+    title = remote_job['title']
+    query = f'SELECT * FROM title WHERE name = {title}'
+    return query_sql(cursor,query)
+
