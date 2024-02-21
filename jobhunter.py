@@ -1,6 +1,9 @@
 import mysql.connector
+import time
 import json
 import requests
+from datetime import date
+import html2text
 
 # https://remotive.com/api/remote-jobs
 
@@ -24,7 +27,7 @@ def add_new_remote_job(cursor, remote_job):
     candidate_required_location = remote_job['candidate_required_location']
     salary = remote_job['salary']
     description = remote_job['description']
-
+    print(salary)
     cursor.execute('INSERT INTO Jobs(title, company_name, category, job_type, candidate_required_location, salary, description) VALUES(%s, %s, %s, %s, %s, %s, %s)', (title, company_name, category, job_type, candidate_required_location, salary, description))
     return cursor
 
@@ -48,14 +51,12 @@ def add_or_print_job(cursor, fetched_jobs):
             print(f'Existing Job found in DB {job["title"]}')
 
 def main():
-    connection = connect_to_sql()
-    cursor = connection.cursor()
+    conn = connect_to_sql()
+    cursor = conn.cursor()
     create_table(cursor)
-    data = fetch_jobs()
-    add_or_print_job(cursor, data)
-    connection.commit()
-    cursor.close()
-    connection.close()
+    while (1):
+        add_or_print_job(cursor, fetch_jobs())
+        time.sleep(240)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
